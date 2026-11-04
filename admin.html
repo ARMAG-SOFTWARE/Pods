@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Painel Admin — Catálogo de Pods</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/catalogo.css" />
+</head>
+<body class="admin">
+  <div class="demo-banner" id="demo-banner" hidden>
+    Modo demonstração: tudo fica salvo só neste navegador e o cliente não vê. Configure o Supabase em
+    <code>catalogo/config.js</code> (veja <code>catalogo/LEIAME.md</code>).
+  </div>
+
+  <!-- LOGIN -->
+  <section class="login" id="login-view" hidden>
+    <form class="card login-card" id="login-form" novalidate>
+      <h1>Painel Admin</h1>
+      <p class="muted">Entre para editar o catálogo</p>
+      <div class="field">
+        <label for="login-email">E-mail</label>
+        <input type="email" id="login-email" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="login-password">Senha</label>
+        <input type="password" id="login-password" autocomplete="current-password" required />
+      </div>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button type="submit" class="btn btn-primary btn-block" id="login-submit">Entrar</button>
+    </form>
+  </section>
+
+  <!-- PAINEL -->
+  <section class="container admin-app" id="app-view" hidden>
+    <header class="admin-header">
+      <div>
+        <h1>Painel Admin</h1>
+        <p class="muted" id="admin-user"></p>
+      </div>
+      <div class="admin-actions">
+        <a class="btn btn-ghost" href="./" target="_blank" rel="noopener">Ver catálogo</a>
+        <button type="button" class="btn btn-ghost" id="copy-link">Copiar link do catálogo</button>
+        <button type="button" class="btn btn-ghost" id="logout">Sair</button>
+      </div>
+    </header>
+
+    <div class="admin-toolbar">
+      <input type="search" id="admin-search" placeholder="Buscar pod..." aria-label="Buscar pod" />
+      <button type="button" class="btn btn-primary" id="new-pod">+ Novo pod</button>
+    </div>
+
+    <p class="status" id="admin-status" role="status">Carregando...</p>
+    <ul class="pod-list" id="pod-list"></ul>
+  </section>
+
+  <!-- FORMULÁRIO DE CADASTRO/EDIÇÃO -->
+  <dialog class="modal editor" id="editor" aria-labelledby="editor-title">
+    <form id="pod-form" novalidate>
+      <header class="editor-header">
+        <h2 id="editor-title">Novo pod</h2>
+        <button type="button" class="icon-btn" id="editor-close" aria-label="Fechar"></button>
+      </header>
+
+      <div class="editor-body">
+        <div class="field">
+          <label for="pod-name">Nome *</label>
+          <input type="text" id="pod-name" maxlength="120" placeholder="Ex: Pod Menta Ice 5000 puffs" required />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="pod-price">Preço (R$) *</label>
+            <input type="text" id="pod-price" inputmode="decimal" placeholder="0,00" required />
+          </div>
+          <div class="field">
+            <label for="pod-category">Categoria / Marca</label>
+            <input type="text" id="pod-category" list="category-options" maxlength="60" placeholder="Opcional" />
+            <datalist id="category-options"></datalist>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pod-description">Descrição</label>
+          <textarea id="pod-description" rows="4" maxlength="2000" placeholder="Sabor, quantidade de puffs, detalhes..."></textarea>
+        </div>
+
+        <label class="switch-field">
+          <input type="checkbox" id="pod-available" checked />
+          <span class="switch" aria-hidden="true"></span>
+          <span>Disponível (aparece no catálogo)</span>
+        </label>
+
+        <div class="field">
+          <span class="label">Fotos</span>
+          <p class="hint">A primeira foto é a capa. Use ★ para escolher outra capa.</p>
+          <div class="image-list" id="image-list"></div>
+          <label class="btn btn-ghost upload-btn">
+            + Adicionar fotos
+            <input type="file" id="pod-images" accept="image/*" multiple hidden />
+          </label>
+        </div>
+
+        <p class="form-error" id="editor-error" role="alert"></p>
+      </div>
+
+      <footer class="editor-footer">
+        <button type="button" class="btn btn-ghost" id="editor-cancel">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="editor-save">Salvar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

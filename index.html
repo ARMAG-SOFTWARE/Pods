@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Pods</title>
+  <meta name="description" content="Confira os pods disponíveis, fotos e valores." />
+
+  <!-- Prévia do link ao enviar pelo WhatsApp -->
+  <meta property="og:title" content="Catálogo de Pods" />
+  <meta property="og:description" content="Confira os pods disponíveis, fotos e valores." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/catalogo.css" />
+</head>
+<body>
+  <div class="demo-banner" id="demo-banner" hidden>
+    Modo demonstração: os pods ficam salvos só neste navegador. Configure o Supabase em
+    <code>catalogo/config.js</code> para o cliente ver o catálogo.
+  </div>
+
+  <header class="hero">
+    <h1 id="store-name">Catálogo de Pods</h1>
+    <p id="store-tagline">Confira os pods disponíveis</p>
+
+    <div class="search">
+      <input type="search" id="search" placeholder="Buscar por nome, sabor, marca..." aria-label="Buscar pods" />
+    </div>
+    <div class="chips" id="categories" role="group" aria-label="Filtrar por categoria"></div>
+  </header>
+
+  <main class="container">
+    <p class="status" id="status" role="status">Carregando pods...</p>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <a class="footer-link" id="footer-whatsapp" target="_blank" rel="noopener">Dúvidas? Fale com a gente no WhatsApp</a>
+  </footer>
+
+  <!-- Detalhes do pod -->
+  <dialog class="modal pod-modal" id="pod-modal" aria-labelledby="modal-name">
+    <button class="icon-btn modal-close" id="modal-close" aria-label="Fechar" type="button"></button>
+    <div class="pod-modal-body">
+      <div class="gallery">
+        <div class="gallery-main" id="gallery-main"></div>
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      </div>
+      <div class="pod-info">
+        <span class="tag" id="modal-category"></span>
+        <h2 id="modal-name"></h2>
+        <p class="price price-lg" id="modal-price"></p>
+        <p class="description" id="modal-description"></p>
+        <a class="btn btn-whatsapp" id="modal-whatsapp" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/catalogo.js"></script>
+</body>
+</html>
