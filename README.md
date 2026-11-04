@@ -37,11 +37,12 @@ Cole os dois em `config.js`. Configure também `whatsappNumber` (ex: `5547999999
 
 > A chave *anon* é pública por natureza e pode ficar no código. Quem protege os dados são as regras do `supabase.sql`. **Nunca** coloque a chave `service_role` no site.
 
-### 4. Publicar o site (GitHub Pages)
+### 4. Site no ar (GitHub Pages)
 
-1. No GitHub, abra o repositório e vá em **Settings → Pages**.
-2. Em *Source*, escolha **Deploy from a branch**, depois a branch `main` e a pasta `/ (root)`, e clique em **Save**.
-3. Depois de alguns minutos, os links ficam assim:
+O site já está publicado pelo GitHub Pages a partir da branch `gh-pages`.
+Você só edita a branch `main`: a automação `.github/workflows/publicar.yml` copia cada alteração da `main` para a `gh-pages`, e o site se atualiza sozinho em 1–2 minutos (acompanhe na aba **Actions**).
+
+Links:
    - Catálogo (para o cliente): `https://armag-software.github.io/Pods/`
    - Painel: `https://armag-software.github.io/Pods/admin.html`
 

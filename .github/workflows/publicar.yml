@@ -1,0 +1,25 @@
+# Publica o site: toda alteração na branch "main" é copiada para a branch
+# "gh-pages", que é a branch que o GitHub Pages coloca no ar.
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-site
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Atualizar gh-pages com o conteúdo da main
+        run: git push --force origin HEAD:refs/heads/gh-pages
