@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Catálogo de Pods</title>
   <meta name="description" content="Confira os pods disponíveis, fotos e valores." />
+  <meta name="theme-color" content="#101C35" />
 
   <!-- Prévia do link ao enviar pelo WhatsApp -->
   <meta property="og:title" content="Catálogo de Pods" />
@@ -14,34 +15,101 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/catalogo.css" />
 </head>
-<body>
+<body class="catalog">
+  <!-- Fundo: grade suíça + iluminação -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-grid shell"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+  </div>
+
   <div class="demo-banner" id="demo-banner" hidden>
     Modo demonstração: os pods ficam salvos só neste navegador. Configure o Supabase em
     <code>catalogo/config.js</code> para o cliente ver o catálogo.
   </div>
 
-  <header class="hero">
-    <h1 id="store-name">Catálogo de Pods</h1>
-    <p id="store-tagline">Confira os pods disponíveis</p>
-
-    <div class="search">
-      <input type="search" id="search" placeholder="Buscar por nome, sabor, marca..." aria-label="Buscar pods" />
+  <header class="site-header">
+    <div class="shell site-header-inner">
+      <a class="wordmark" href="#top">
+        <span class="wordmark-mark" aria-hidden="true"></span>
+        <span id="brand-name">Catálogo de Pods</span>
+      </a>
+      <span class="header-edition eyebrow" id="header-edition"></span>
+      <a class="btn btn-glass btn-sm" id="header-whatsapp" target="_blank" rel="noopener">Fale conosco</a>
     </div>
-    <div class="chips" id="categories" role="group" aria-label="Filtrar por categoria"></div>
   </header>
 
-  <main class="container">
-    <p class="status" id="status" role="status">Carregando pods...</p>
-    <div class="grid" id="grid"></div>
+  <main id="top">
+    <!-- Apresentação -->
+    <section class="shell hero">
+      <div class="hero-index">
+        <span class="eyebrow">(01)</span>
+        <span class="eyebrow">Coleção atual</span>
+      </div>
+      <h1 class="hero-title" id="store-name">Catálogo de Pods</h1>
+      <div class="hero-aside">
+        <p class="hero-lead" id="store-tagline">Confira os pods disponíveis</p>
+        <dl class="hero-stats">
+          <div>
+            <dt class="eyebrow">Modelos</dt>
+            <dd id="stat-count">—</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Categorias</dt>
+            <dd id="stat-categories">—</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Pedido</dt>
+            <dd>WhatsApp</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Produtos -->
+    <section class="shell products" aria-labelledby="products-title">
+      <div class="section-head">
+        <span class="eyebrow">(02)</span>
+        <h2 id="products-title">Produtos</h2>
+        <span class="eyebrow result-count" id="result-count" aria-live="polite"></span>
+      </div>
+
+      <div class="toolbar">
+        <label class="search glass">
+          <span class="search-icon" id="search-icon"></span>
+          <input type="search" id="search" placeholder="Buscar por nome, sabor, marca..." aria-label="Buscar pods" autocomplete="off" />
+        </label>
+        <label class="sort glass">
+          <span class="sort-label">Ordenar</span>
+          <select id="sort" aria-label="Ordenar produtos">
+            <option value="default">Destaques</option>
+            <option value="price-asc">Menor preço</option>
+            <option value="price-desc">Maior preço</option>
+            <option value="name">Nome A–Z</option>
+          </select>
+        </label>
+      </div>
+      <div class="chips" id="categories" role="group" aria-label="Filtrar por categoria"></div>
+
+      <p class="status" id="status" role="status">Carregando pods...</p>
+      <div class="grid" id="grid"></div>
+    </section>
   </main>
 
-  <footer class="footer">
+  <footer class="shell site-footer">
+    <div class="footer-col">
+      <span class="wordmark wordmark-sm">
+        <span class="wordmark-mark" aria-hidden="true"></span>
+        <span id="footer-brand">Catálogo de Pods</span>
+      </span>
+    </div>
     <a class="footer-link" id="footer-whatsapp" target="_blank" rel="noopener">Dúvidas? Fale com a gente no WhatsApp</a>
+    <span class="eyebrow footer-year" id="footer-year"></span>
   </footer>
 
   <!-- Detalhes do pod -->
@@ -50,14 +118,29 @@
     <div class="pod-modal-body">
       <div class="gallery">
         <div class="gallery-main" id="gallery-main"></div>
+        <span class="gallery-counter eyebrow" id="gallery-counter" hidden></span>
         <div class="gallery-thumbs" id="gallery-thumbs"></div>
       </div>
       <div class="pod-info">
-        <span class="tag" id="modal-category"></span>
+        <div class="pod-info-meta">
+          <span class="eyebrow eyebrow-lime" id="modal-category"></span>
+          <span class="eyebrow" id="modal-ref"></span>
+        </div>
         <h2 id="modal-name"></h2>
-        <p class="price price-lg" id="modal-price"></p>
-        <p class="description" id="modal-description"></p>
-        <a class="btn btn-whatsapp" id="modal-whatsapp" target="_blank" rel="noopener"></a>
+        <dl class="spec">
+          <div>
+            <dt class="eyebrow">Preço</dt>
+            <dd class="price-lg" id="modal-price"></dd>
+          </div>
+        </dl>
+        <div class="spec-block" id="modal-description-block">
+          <span class="eyebrow">Descrição</span>
+          <p class="description" id="modal-description"></p>
+        </div>
+        <div class="pod-info-actions">
+          <a class="btn btn-lime btn-lg" id="modal-whatsapp" target="_blank" rel="noopener"></a>
+          <p class="fine-print" id="modal-fine-print">Você será direcionado ao WhatsApp para confirmar disponibilidade.</p>
+        </div>
       </div>
     </div>
   </dialog>

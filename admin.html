@@ -9,12 +9,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"
     rel="stylesheet"
   />
+  <meta name="theme-color" content="#101C35" />
   <link rel="stylesheet" href="css/catalogo.css" />
 </head>
 <body class="admin">
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-grid shell"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+  </div>
+
   <div class="demo-banner" id="demo-banner" hidden>
     Modo demonstração: tudo fica salvo só neste navegador e o cliente não vê. Configure o Supabase em
     <code>catalogo/config.js</code> (veja <code>catalogo/LEIAME.md</code>).
@@ -22,8 +29,9 @@
 
   <!-- LOGIN -->
   <section class="login" id="login-view" hidden>
-    <form class="card login-card" id="login-form" novalidate>
-      <h1>Painel Admin</h1>
+    <form class="card glass login-card" id="login-form" novalidate>
+      <span class="wordmark wordmark-sm"><span class="wordmark-mark" aria-hidden="true"></span>Catálogo</span>
+      <h1>Painel Admin<span class="accent-dot">.</span></h1>
       <p class="muted">Entre para editar o catálogo</p>
       <div class="field">
         <label for="login-email">E-mail</label>
@@ -34,27 +42,30 @@
         <input type="password" id="login-password" autocomplete="current-password" required />
       </div>
       <p class="form-error" id="login-error" role="alert"></p>
-      <button type="submit" class="btn btn-primary btn-block" id="login-submit">Entrar</button>
+      <button type="submit" class="btn btn-lime btn-block" id="login-submit">Entrar</button>
     </form>
   </section>
 
   <!-- PAINEL -->
   <section class="container admin-app" id="app-view" hidden>
     <header class="admin-header">
-      <div>
-        <h1>Painel Admin</h1>
+      <div class="admin-title">
+        <span class="eyebrow">(Admin) — Gestão do catálogo</span>
+        <h1>Painel Admin<span class="accent-dot">.</span></h1>
         <p class="muted" id="admin-user"></p>
       </div>
       <div class="admin-actions">
-        <a class="btn btn-ghost" href="./" target="_blank" rel="noopener">Ver catálogo</a>
-        <button type="button" class="btn btn-ghost" id="copy-link">Copiar link do catálogo</button>
-        <button type="button" class="btn btn-ghost" id="logout">Sair</button>
+        <a class="btn btn-glass btn-sm" href="./" target="_blank" rel="noopener">Ver catálogo</a>
+        <button type="button" class="btn btn-glass btn-sm" id="copy-link">Copiar link do catálogo</button>
+        <button type="button" class="btn btn-glass btn-sm" id="logout">Sair</button>
       </div>
     </header>
 
     <div class="admin-toolbar">
-      <input type="search" id="admin-search" placeholder="Buscar pod..." aria-label="Buscar pod" />
-      <button type="button" class="btn btn-primary" id="new-pod">+ Novo pod</button>
+      <label class="search glass">
+        <input type="search" id="admin-search" placeholder="Buscar pod..." aria-label="Buscar pod" />
+      </label>
+      <button type="button" class="btn btn-lime" id="new-pod">+ Novo pod</button>
     </div>
 
     <p class="status" id="admin-status" role="status">Carregando...</p>
@@ -102,7 +113,7 @@
           <span class="label">Fotos</span>
           <p class="hint">A primeira foto é a capa. Use ★ para escolher outra capa.</p>
           <div class="image-list" id="image-list"></div>
-          <label class="btn btn-ghost upload-btn">
+          <label class="btn btn-glass upload-btn">
             + Adicionar fotos
             <input type="file" id="pod-images" accept="image/*" multiple hidden />
           </label>
@@ -112,8 +123,8 @@
       </div>
 
       <footer class="editor-footer">
-        <button type="button" class="btn btn-ghost" id="editor-cancel">Cancelar</button>
-        <button type="submit" class="btn btn-primary" id="editor-save">Salvar</button>
+        <button type="button" class="btn btn-glass" id="editor-cancel">Cancelar</button>
+        <button type="submit" class="btn btn-lime" id="editor-save">Salvar</button>
       </footer>
     </form>
   </dialog>

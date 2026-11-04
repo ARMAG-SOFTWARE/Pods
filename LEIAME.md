@@ -60,3 +60,19 @@ No painel, o botão **"Copiar link do catálogo"** copia o link certo.
 | `supabase.sql` | Script que cria tabela, regras de acesso e bucket de fotos |
 
 As fotos são reduzidas automaticamente (no máximo 1400px) antes do envio, para o catálogo carregar rápido no celular.
+
+## Identidade visual
+
+O visual combina **Swiss International Style** (grade de 12 colunas, tipografia Inter em tamanhos fortes, numeração editorial `(01)`, linhas finas) com **glassmorphism** (superfícies translúcidas com desfoque, reflexos e bordas brancas suaves).
+
+Todas as cores, medidas e animações ficam como variáveis no topo de `css/catalogo.css`:
+
+| Variável | Cor | Uso |
+| --- | --- | --- |
+| `--midnight` | `#101C35` | Fundo principal |
+| `--navy` | `#263957` | Superfícies e fundo das fotos |
+| `--white` | `#FFFFFF` | Texto e contraste |
+| `--lime` | `#B7F52A` | Botões de ação, preços em destaque e detalhes de luz |
+| `--glass` | `rgba(255,255,255,0.08)` | Superfícies de vidro |
+
+Dica: a **primeira linha da descrição** aparece no card como sabor/variação (ex: `Menta gelada · 5.000 puffs`).
