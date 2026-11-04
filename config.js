@@ -8,8 +8,10 @@ window.CATALOG_CONFIG = {
   storeName: "Catálogo de Pods",
   tagline: "Confira os pods disponíveis e peça pelo WhatsApp",
 
-  // WhatsApp que recebe os pedidos (DDI + DDD + número, somente dígitos)
-  whatsappNumber: "5547999999999", // TODO: substitua pelo número real
+  // WhatsApp que recebe os pedidos (DDI + DDD + número, somente dígitos).
+  // Ex: "5547999999999". Enquanto estiver vazio, o site esconde os botões
+  // de WhatsApp e os cards mostram "Ver detalhes".
+  whatsappNumber: "",
 
   // Supabase (banco de dados + fotos + login do admin).
   // Enquanto estes dois campos estiverem vazios, o catálogo roda em
