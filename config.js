@@ -1,7 +1,7 @@
 // =========================================
 // CONFIGURAÇÃO DO CATÁLOGO
 // =========================================
-// Edite os valores abaixo. Veja o passo a passo completo em catalogo/LEIAME.md.
+// Edite os valores abaixo. Veja o passo a passo completo no README.md.
 
 window.CATALOG_CONFIG = {
   // Nome da loja e frase exibidos no topo do catálogo

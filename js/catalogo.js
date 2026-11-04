@@ -404,7 +404,7 @@
     modal.scrollTop = 0;
   }
 
-  // Link direto para um pod: catalogo/#pod-<id>
+  // Link direto para um pod: .../#pod-<id>
   function openFromHash() {
     const match = location.hash.match(/^#pod-(.+)$/);
     if (!match) return;

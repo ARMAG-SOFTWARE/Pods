@@ -1,7 +1,7 @@
 # Catálogo de Pods + Painel Admin
 
-- **`catalogo/`** é o link que você envia para o cliente: mostra os pods disponíveis com foto, descrição e preço, e cada pod tem um botão "Pedir pelo WhatsApp".
-- **`catalogo/admin.html`** é o painel para cadastrar, editar, ocultar, reordenar e excluir pods, e para enviar fotos.
+- **`index.html`** (a página inicial do site) é o link que você envia para o cliente: mostra os pods disponíveis com foto, descrição e preço, e cada pod tem um botão "Pedir pelo WhatsApp".
+- **`admin.html`** é o painel para cadastrar, editar, ocultar, reordenar e excluir pods, e para enviar fotos.
 
 Dá para mandar o link de um pod específico: abra o pod no catálogo e copie o endereço (termina em `#pod-...`).
 
@@ -14,7 +14,7 @@ Com `supabaseUrl` e `supabaseAnonKey` vazios em `config.js`, tudo funciona, mas 
 ### 1. Criar o banco no Supabase
 
 1. Crie uma conta em <https://supabase.com> e um novo projeto (o plano gratuito basta).
-2. No projeto, abra **SQL Editor → New query** e cole o conteúdo de `catalogo/supabase.sql`.
+2. No projeto, abra **SQL Editor → New query** e cole o conteúdo de `supabase.sql`.
 3. **Na última linha do SQL, troque `seu-email@exemplo.com` pelo seu e-mail** e clique em **Run**.
 
 ### 2. Criar seu usuário de admin
@@ -33,7 +33,7 @@ Em **Project Settings → API** (ou **Data API**), copie:
 - **Project URL** → `supabaseUrl`
 - chave **anon public** → `supabaseAnonKey`
 
-Cole os dois em `catalogo/config.js`. Configure também `whatsappNumber` (ex: `5547999999999`) e o nome da loja.
+Cole os dois em `config.js`. Configure também `whatsappNumber` (ex: `5547999999999`) e o nome da loja.
 
 > A chave *anon* é pública por natureza e pode ficar no código. Quem protege os dados são as regras do `supabase.sql`. **Nunca** coloque a chave `service_role` no site.
 
@@ -42,8 +42,8 @@ Cole os dois em `catalogo/config.js`. Configure também `whatsappNumber` (ex: `5
 1. No GitHub, abra o repositório e vá em **Settings → Pages**.
 2. Em *Source*, escolha **Deploy from a branch**, depois a branch `main` e a pasta `/ (root)`, e clique em **Save**.
 3. Depois de alguns minutos, os links ficam assim:
-   - Catálogo (para o cliente): `https://SEU-USUARIO.github.io/Projeto-Senai/catalogo/`
-   - Painel: `https://SEU-USUARIO.github.io/Projeto-Senai/catalogo/admin.html`
+   - Catálogo (para o cliente): `https://armag-software.github.io/Pods/`
+   - Painel: `https://armag-software.github.io/Pods/admin.html`
 
 No painel, o botão **"Copiar link do catálogo"** copia o link certo.
 
