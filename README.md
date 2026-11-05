@@ -5,39 +5,40 @@
 
 Dá para mandar o link de um pod específico: abra o pod no catálogo e copie o endereço (termina em `#pod-...`).
 
-## Testar agora (modo demonstração)
+## Configuração atual
 
-Com `supabaseUrl` e `supabaseAnonKey` vazios em `config.js`, tudo funciona, mas os dados ficam salvos **só no seu navegador**. Serve para testar o painel. O cliente não vai ver nada. Para uso real, siga os passos abaixo.
+| Item | Situação |
+| --- | --- |
+| Site (GitHub Pages) | No ar, publicado automaticamente a cada alteração na `main` |
+| Banco de dados | Supabase, projeto `armag-cobranca-2` (`hgrkqkucdtcydpxnrwxg`), já ligado no `config.js` |
+| Fotos | Bucket público `pod-images` (até 5 MB por foto) |
+| WhatsApp | **Pendente**: preencha `whatsappNumber` no `config.js` quando tiver o número |
 
-## Colocar no ar (gratuito)
+O catálogo divide o projeto Supabase com o sistema de cobrança. Por isso tudo dele tem nomes próprios (`pods`, `pods_admins`, `pods_is_admin`, `pod-images`) e as regras só valem para essas peças: nada da cobrança foi alterado.
 
-### 1. Criar o banco no Supabase
+## Quem pode editar o catálogo
 
-1. Crie uma conta em <https://supabase.com> e um novo projeto (o plano gratuito basta).
-2. No projeto, abra **SQL Editor → New query** e cole o conteúdo de `supabase.sql`.
-3. **Na última linha do SQL, troque `seu-email@exemplo.com` pelo seu e-mail** e clique em **Run**.
+Só entra no painel quem tem **usuário no Supabase** *e* está na tabela **`pods_admins`**. Usuários da cobrança que não estão nessa lista não conseguem alterar nada no catálogo.
 
-### 2. Criar seu usuário de admin
+Para dar acesso a alguém:
 
-1. Vá em **Authentication → Users → Add user → Create new user**.
-2. Use **o mesmo e-mail** do passo anterior, defina uma senha e marque **Auto Confirm User**.
-3. Em **Authentication → Sign In / Providers**, **desative "Allow new users to sign up"**, para ninguém mais conseguir criar conta.
+1. No Supabase, vá em **Authentication → Users → Add user → Create new user**, defina e-mail e senha e marque **Auto Confirm User** (se a pessoa já tiver usuário na cobrança, pule este passo e use o mesmo login).
+2. Em **SQL Editor**, rode:
+   ```sql
+   insert into public.pods_admins (email) values ('email-da-pessoa@exemplo.com');
+   ```
 
-> Para dar acesso a outra pessoa: crie o usuário dela (passo 2) e rode no SQL Editor:
-> `insert into public.admins (email) values ('email-da-pessoa@exemplo.com');`
+Para tirar o acesso: `delete from public.pods_admins where email = 'email-da-pessoa@exemplo.com';`
 
-### 3. Ligar o site ao Supabase
+> **Não** desative "Allow new users to sign up" sem checar o sistema de cobrança: a configuração vale para o projeto inteiro. O catálogo não depende disso, porque quem decide é a tabela `pods_admins`.
 
-Em **Project Settings → API** (ou **Data API**), copie:
+> A chave *anon* no `config.js` é pública por natureza. Quem protege os dados são as regras do `supabase.sql`. **Nunca** coloque a chave `service_role` no site.
 
-- **Project URL** → `supabaseUrl`
-- chave **anon public** → `supabaseAnonKey`
+## Modo demonstração
 
-Cole os dois em `config.js`. Configure também `whatsappNumber` (ex: `5547999999999`) e o nome da loja.
+Se `supabaseUrl` e `supabaseAnonKey` ficarem vazios no `config.js`, o site funciona salvando tudo **só no navegador** (útil para testes; o cliente não vê nada).
 
-> A chave *anon* é pública por natureza e pode ficar no código. Quem protege os dados são as regras do `supabase.sql`. **Nunca** coloque a chave `service_role` no site.
-
-### 4. Site no ar (GitHub Pages)
+## Site no ar (GitHub Pages)
 
 O site já está publicado pelo GitHub Pages a partir da branch `gh-pages`.
 Você só edita a branch `main`: a automação `.github/workflows/publicar.yml` copia cada alteração da `main` para a `gh-pages`, e o site se atualiza sozinho em 1–2 minutos (acompanhe na aba **Actions**).

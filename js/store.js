@@ -213,7 +213,7 @@
 
   async function isAdmin() {
     if (isDemo) return true;
-    const { data, error } = await requireClient().rpc("is_admin");
+    const { data, error } = await requireClient().rpc("pods_is_admin");
     if (error) throw error;
     return data === true;
   }

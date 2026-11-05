@@ -17,8 +17,10 @@ window.CATALOG_CONFIG = {
   // Enquanto estes dois campos estiverem vazios, o catálogo roda em
   // "modo demonstração": os dados ficam salvos SÓ no seu navegador
   // e o cliente NÃO vai enxergar os pods que você cadastrar.
-  supabaseUrl: "", // ex: "https://abcdefghijklmnop.supabase.co"
-  supabaseAnonKey: "", // Project Settings > API > "anon public" key
+  // Chave "anon" é pública por natureza: quem protege os dados são as regras do supabase.sql.
+  supabaseUrl: "https://hgrkqkucdtcydpxnrwxg.supabase.co",
+  supabaseAnonKey:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhncmtxa3VjZHRjeWRweG5yd3hnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNzQyNzksImV4cCI6MjEwODk1MDI3OX0.-BDcdy1puRGbEOh0VXFyMmiEy05i6mBQU2Qs1gyNVhM",
 
   // Nome do bucket de fotos no Supabase Storage (criado pelo supabase.sql)
   storageBucket: "pod-images",

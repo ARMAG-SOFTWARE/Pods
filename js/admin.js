@@ -33,7 +33,7 @@
     if (/invalid login credentials/i.test(msg)) return "E-mail ou senha incorretos.";
     if (/email not confirmed/i.test(msg)) return "Confirme o e-mail antes de entrar.";
     if (/row-level security|permission denied|not authorized|unauthorized/i.test(msg)) {
-      return "Sem permissão. Verifique se seu e-mail está na tabela admins do Supabase.";
+      return "Sem permissão. Verifique se seu e-mail está na tabela pods_admins do Supabase.";
     }
     if (/failed to fetch|network/i.test(msg)) return "Falha de conexão. Verifique sua internet.";
     return msg;
@@ -50,7 +50,7 @@
   async function enterApp(user) {
     if (!(await store.isAdmin())) {
       await store.signOut();
-      showLogin(`O usuário ${user.email} não é admin. Adicione o e-mail na tabela "admins" do Supabase.`);
+      showLogin(`O usuário ${user.email} não é admin. Adicione o e-mail na tabela "pods_admins" do Supabase.`);
       return;
     }
     loginView.hidden = true;
